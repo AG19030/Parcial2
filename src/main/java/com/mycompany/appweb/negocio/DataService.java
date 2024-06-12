@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,7 +51,18 @@ public class DataService {
     public void editAlumno(Alumno alumno){
         entityManager.merge(alumno);
     }
-    
+    @Transactional
+   public List<Alumno> buscarAlumnosPorNombre(String nombre) {
+        Query query = entityManager.createQuery("SELECT e FROM Alumno e WHERE LOWER(e.nombre) LIKE :nombre ORDER BY e.id ASC");
+        query.setParameter("nombre", "%" + nombre.toLowerCase() + "%");
+        return query.getResultList();
+    }
+     @Transactional
+   public List<Materia> buscarMateriasPorNombre(String nombre) {
+        Query query = entityManager.createQuery("SELECT e FROM Materia e WHERE LOWER(e.nombre) LIKE :nombre ORDER BY e.id ASC");
+        query.setParameter("nombre", "%" + nombre.toLowerCase() + "%");
+        return query.getResultList();
+    }
     //--------------------------------------------------Materia--------------------------------------------------
     
     public List<Materia> getMaterias(){

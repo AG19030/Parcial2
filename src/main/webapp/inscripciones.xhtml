@@ -25,45 +25,34 @@
                 Seleccion
             </f:facet>
             <f:view>
-                <h:form id="Titulos">
-                    <p:column style="vertical-align: middle; float: none">
-                        <p:outputLabel value="Buscar Alumno" style="margin: 48px"></p:outputLabel>
-                    </p:column>
-                    <p:spacer width="2%"/>
-                    <p:column style="vertical-align: middle; float: none">
-                        <p:outputLabel value="Buscar Materia" style="margin: 49px"></p:outputLabel>
-                    </p:column>
-                    <p:spacer width="15%"/>
-                    <p:column style="vertical-align: middle; float: none">
+                 <h:form id="alumnoForm">
+                     <h1>Nueva inscripcion</h1>
+                    <p:panelGrid columns="1" layout="grid">
+
+                        <p:outputLabel value="Buscar Alumno" ></p:outputLabel>
+                        <p:autoComplete value="#{inscripcionController.alumnoSeleccionado}" dropdown="true" var="alumno" 
+                                        completeMethod="#{inscripcionController.completeAlumnos}" itemLabel="#{alumno.nombre}"  />
+
+
+                        <p:outputLabel value="Buscar Materia" ></p:outputLabel>
+                        
+                        <p:autoComplete value="#{inscripcionController.materiaSeleccionada}" dropdown="true" var="alumno" 
+                                        completeMethod="#{inscripcionController.completeMaterias}" itemLabel="#{alumno.nombre}"  />
+                        
                         <p:outputLabel value="Año:" style="margin: 5px"></p:outputLabel>
-                        <p:inputText id="anio" value=""></p:inputText>
-                    </p:column>
-                    <p:spacer width="2%"/>
-                    <p:column style="vertical-align: middle; float: none">
+                        <p:inputText id="anio" value="#{inscripcionController.inscripcion.anio}"></p:inputText>
+
+
+
+
                         <p:outputLabel value="Ciclo:" style="margin: 5px"></p:outputLabel>
-                        <p:inputText id="ciclo" value=""></p:inputText>
-                    </p:column>
-                </h:form>
+                        <p:inputText id="ciclo" value="#{inscripcionController.inscripcion.ciclo}"></p:inputText>
 
 
-                <h:form id="seleccion">
-                    <p:column style="vertical-align: middle; float: none">
 
-                        <p:selectOneMenu id="nombre"  value="#{inscripcionController.alumnoSeleccionado}" style="width:200px">
-                            <f:selectItem itemLabel="Seleccione el alumno" itemValue="" noSelectionOption="true"/>
-                            <f:selectItems value="#{indexController.alumnosList}" var="alumno" itemLabel="#{alumno.nombre}" itemValue="#{alumno}"/>
-                        </p:selectOneMenu>
-                        <p:spacer width="3%"/>
-                        <p:selectOneMenu id="materia" value="#{inscripcionController.materiaSeleccionada}" style="width:200px">
-                            <f:selectItem itemLabel="Seleccione la materia" itemValue="" noSelectionOption="true"/>
-                            <f:selectItems value="#{materiaController.materiasList}" var="materia" itemLabel="#{materia.nombre}" itemValue="#{materia}"/>
-                        </p:selectOneMenu>
-                        <p:spacer width="25%"/>
-                    </p:column>
 
-                    <p:column style="vertical-align: middle; float: none">
-                        <p:commandButton value="Guardar" actionListener="#{inscripcionController.guardarInscripcion}" style="width:350px; margin: 10px" update="tablaInscripciones"/>
-                    </p:column>
+                        <p:commandButton  value="Guardar" actionListener="#{inscripcionController.guardarInscripcion()}" />
+                    </p:panelGrid>
                 </h:form>
             </f:view>
         </p:card>

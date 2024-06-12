@@ -37,9 +37,17 @@ public class InscripcionController {
         inscripcionesList = servicio.getInscripciones();
     }
 
+    public List<Alumno> completeAlumnos(String query) {
+        
+        return servicio.buscarAlumnosPorNombre(query);
+    }
+     public List<Materia> completeMaterias(String query) {
+        
+        return servicio.buscarMateriasPorNombre(query);
+    }
+
     public void guardarInscripcion() {
 
-       
         inscripcion.setAlumno(alumnoSeleccionado);
         inscripcion.setMateria(materiaSeleccionada);
         inscripcion.setFechaInscripcion(LocalDate.now());
